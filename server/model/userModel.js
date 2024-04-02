@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 // I need to remove many error replies, as we will run yup form validation on frontend.
 const userSchema = new mongoose.Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: [true, "Please enter your name"],
       maxLenth: [30, "You cannot exceed 30 characters"],
@@ -18,9 +18,11 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Please enter a valid password"],
       minLength: [6, "You should have minimum of 6 characters"],
       select: false,
+    },
+    googleId: {
+      type: String,
     },
   },
   { timestamps: true }
