@@ -11,7 +11,7 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 app.use(express.json());
-console.log(process.env.PORT);
+console.log(process.env.MONGO_URI);
 app.use(
   cors({
     origin: process.env.COOKIES_ORIGIN,
