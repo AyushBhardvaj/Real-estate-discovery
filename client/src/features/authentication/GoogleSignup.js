@@ -1,5 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./authSlice";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import LoadingBackdrop from "components/LoadingBackdrop";
 import ErrorDisplay from "components/ErrorDisplay";
 
 const GoogleSignup = () => {
-  const [openSnackbar, setopenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [googleLogin, { error, isLoading }] = useGoogleLoginMutation();
@@ -24,22 +24,27 @@ const GoogleSignup = () => {
           navigate("/");
         }
       } catch (error) {
-        alert(error);
+        setErrorMessage(error.message);
       }
     },
     flow: "auth-code",
   });
+
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(error.data?.error);
+    }
+  }, [error]);
 
   return (
     <div className="w-full">
       {isLoading ? (
         <LoadingBackdrop openBackdrop={isLoading} />
       ) : (
-        error && (
+        errorMessage && (
           <ErrorDisplay
-            message={error?.data?.error}
-            open={openSnackbar}
-            handleClose={() => setopenSnackbar(false)}
+             message={errorMessage}
+             handleClose={() => setErrorMessage("")}
           />
         )
       )}
