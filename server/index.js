@@ -23,6 +23,7 @@ app.use(
   })
 );
 console.log(process.env.COOKIES_ORIGIN);
+console.log(process.env.MONGO_URI);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
