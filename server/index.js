@@ -24,11 +24,16 @@ const app = express();
 // );
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
+  res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_ORIGIN);
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, PUT, PATCH, POST, DELETE"
+    "GET, PUT, PATCH, POST, DELETE,"
   );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
+
   res.setHeader("Access-Control-Allow-Credentials", true);
 
   next();
