@@ -24,6 +24,12 @@ const app = express();
 // );
 
 app.use((req, res, next) => {
+  console.log("Incoming Request Header: ", req.headers);
+
+  res.on("finish", () => {
+    console.log("Outgoing Response Headers:", res.getHeaders());
+  });
+
   res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
   res.setHeader(
     "Access-Control-Allow-Methods",
