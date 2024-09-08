@@ -24,10 +24,10 @@ const app = express();
 // );
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_ORIGIN);
+  res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, PUT, PATCH, POST, DELETE,"
+    "GET, PUT, PATCH, POST, DELETE, OPIONS"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
@@ -35,6 +35,10 @@ app.use((req, res, next) => {
   );
 
   res.setHeader("Access-Control-Allow-Credentials", true);
+
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204); // Respond immediately to OPTIONS requests
+  }
 
   next();
 });
