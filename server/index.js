@@ -27,11 +27,11 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, PUT, PATCH, POST, DELETE, OPIONS"
+    "GET, PUT, PATCH, POST, DELETE, OPTIONS"
   );
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "X-Requested-With,content-type, Authorization, Accept"
   );
 
   res.setHeader("Access-Control-Allow-Credentials", true);
