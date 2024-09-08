@@ -15,15 +15,24 @@ dotenv.config();
 const app = express();
 
 // CORS Configuration
-app.use(
-  cors({
-    origin: process.env.COOKIES_ORIGIN,
-    credentials: true,
-    exposedHeaders: ["Set-Cookie"],
-  })
-);
-console.log(process.env.COOKIES_ORIGIN);
-console.log(process.env.MONGO_URI);
+// app.use(
+//   cors({
+//     origin: process.env.COOKIES_ORIGIN,
+//     credentials: true,
+//     exposedHeaders: ["Set-Cookie"],
+//   })
+// );
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, PUT, PATCH, POST, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+
+  next();
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -57,7 +66,7 @@ app.post("/api/v1/upload-signature", (req, res) => {
   const signature = cloudinary.utils.api_sign_request(
     paramsToSign,
     process.env.CLOUD_API_SECRET
-  );  
+  );
   res.json({ timestamp, signature, api_key: process.env.CLOUD_API_KEY });
 });
 
