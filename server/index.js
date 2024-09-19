@@ -98,15 +98,7 @@ app.post("/api/v1/delete-signature", (req, res) => {
 });
 
 //Routes
-app.post("/api/v1/auth/login", (req, res) => {
-  console.log("login request received");
-  console.log("req.body: ", req.body);
-  // res.status(statusCode).json({
-  //   success: true,
-  //   user: "request working fine",
-  // });
-});
-// app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/listing", listingRoutes);
 
