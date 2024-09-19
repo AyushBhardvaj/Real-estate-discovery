@@ -15,39 +15,39 @@ dotenv.config();
 const app = express();
 
 // CORS Configuration
-// app.use(
-//   cors({
-//     origin: process.env.COOKIES_ORIGIN,
-//     credentials: true,
-//     exposedHeaders: ["Set-Cookie"],
-//   })
-// );
+app.use(
+  cors({
+    origin: process.env.COOKIES_ORIGIN,
+    credentials: true,
+    exposedHeaders: ["Set-Cookie"],
+  })
+);
 
-app.use((req, res, next) => {
-  console.log("Incoming Request Header: ", req.headers);
+// app.use((req, res, next) => {
+//   console.log("Incoming Request Header: ", req.headers);
 
-  res.on("finish", () => {
-    console.log("Outgoing Response Headers:", res.getHeaders());
-  });
+//   res.on("finish", () => {
+//     console.log("Outgoing Response Headers:", res.getHeaders());
+//   });
 
-  res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, PUT, PATCH, POST, DELETE, OPTIONS"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type, Authorization, Accept"
-  );
+//   res.setHeader("Access-Control-Allow-Origin", process.env.COOKIES_ORIGIN);
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, PUT, PATCH, POST, DELETE, OPTIONS"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "X-Requested-With,content-type, Authorization, Accept"
+//   );
 
-  res.setHeader("Access-Control-Allow-Credentials", true);
+//   res.setHeader("Access-Control-Allow-Credentials", true);
 
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204); // Respond immediately to OPTIONS requests
-  }
+//   if (req.method === "OPTIONS") {
+//     return res.sendStatus(204); // Respond immediately to OPTIONS requests
+//   }
 
-  next();
-});
+//   next();
+// });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
