@@ -13,7 +13,7 @@ const sendToken = (statusCode, user, res) => {
     secure: true,
     httpOnly: true,
   };
-  res.getHeaders();
+  console.log(res.getHeaders());
   console.log(user);
 
   res.status(statusCode).cookie("token", token, options).json({
