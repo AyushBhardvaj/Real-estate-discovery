@@ -14,6 +14,8 @@ const sendToken = (statusCode, user, res) => {
     httpOnly: true,
   };
   res.getHeaders();
+  console.log(user);
+
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
     user,
